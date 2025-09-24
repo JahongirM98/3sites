@@ -1,0 +1,62 @@
+services:
+  reverse-proxy:
+    image: nginx:1.27-alpine
+    ports: ["80:80"]
+    volumes:
+      - ./docker/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - muosirplast-app
+      - tojirplast-app
+      - sugdpark-app
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./docker/postgres/init-multiple-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+
+  muosirplast-app:
+    build:
+      context: .
+      dockerfile: ./docker/app.Dockerfile
+      args:
+        SERVICE_PATH: services/muosirplast_site
+    env_file: ./env/dev/muosirplast.env
+    command: python manage.py runserver 0.0.0.0:8001
+    volumes:
+      - ./services/muosirplast_site:/app
+    expose: ["8001"]
+    depends_on: [db]
+
+  tojirplast-app:
+    build:
+      context: .
+      dockerfile: ./docker/app.Dockerfile
+      args:
+        SERVICE_PATH: services/tojirplast_site
+    env_file: ./env/dev/tojirplast.env
+    command: python manage.py runserver 0.0.0.0:8002
+    volumes:
+      - ./services/tojirplast_site:/app
+    expose: ["8002"]
+    depends_on: [db]
+
+  sugdpark-app:
+    build:
+      context: .
+      dockerfile: ./docker/app.Dockerfile
+      args:
+        SERVICE_PATH: services/sugdpark_site
+    env_file: ./env/dev/sugdpark.env
+    command: python manage.py runserver 0.0.0.0:8003
+    volumes:
+      - ./services/sugdpark_site:/app
+    expose: ["8003"]
+    depends_on: [db]
+
+volumes:
+  pgdata:
