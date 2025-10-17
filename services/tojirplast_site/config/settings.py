@@ -42,7 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "pages"
+    "pages",
+    "feedback",
+    "catalog_tojir",
 ]
 
 MIDDLEWARE = [
