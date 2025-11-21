@@ -6,6 +6,9 @@ def home(request):
 def about(request):
     return render(request, "pages/about.html")
 
+def delivery(request):
+    return render(request, "pages/delivery.html")
+
 def contacts(request):
     from feedback.forms import ContactForm  # ленивый импорт
     if request.method == "POST":
