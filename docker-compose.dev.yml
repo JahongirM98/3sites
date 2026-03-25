@@ -1,23 +1,33 @@
 services:
+
   reverse-proxy:
     image: nginx:1.27-alpine
-    ports: ["80:80"]
+    ports:
+      - "80:80"
     volumes:
       - ./docker/nginx/nginx.dev.conf:/etc/nginx/nginx.conf:ro
     depends_on:
-      - muosirplast-app
-      - tojirplast-app
-      - sugdpark-app
+      muosirplast-app:
+        condition: service_started
+      tojirplast-app:
+        condition: service_started
+      sugdpark-app:
+        condition: service_started
 
   db:
     image: postgres:16-alpine
-    environment:
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_DB: postgres
     volumes:
       - pgdata:/var/lib/postgresql/data
-      - ./docker/postgres/init-multiple-db.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - ./docker/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   muosirplast-app:
     build:
@@ -26,11 +36,18 @@ services:
       args:
         SERVICE_PATH: services/muosirplast_site
     env_file: ./env/dev/muosirplast.env
-    command: python manage.py runserver 0.0.0.0:8001
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8001
+      "
     volumes:
       - ./services/muosirplast_site:/app
-    expose: ["8001"]
-    depends_on: [db]
+    expose:
+      - "8001"
+    depends_on:
+      db:
+        condition: service_healthy
 
   tojirplast-app:
     build:
@@ -39,11 +56,18 @@ services:
       args:
         SERVICE_PATH: services/tojirplast_site
     env_file: ./env/dev/tojirplast.env
-    command: python manage.py runserver 0.0.0.0:8002
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8002
+      "
     volumes:
       - ./services/tojirplast_site:/app
-    expose: ["8002"]
-    depends_on: [db]
+    expose:
+      - "8002"
+    depends_on:
+      db:
+        condition: service_healthy
 
   sugdpark-app:
     build:
@@ -52,11 +76,35 @@ services:
       args:
         SERVICE_PATH: services/sugdpark_site
     env_file: ./env/dev/sugdpark.env
-    command: python manage.py runserver 0.0.0.0:8003
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8003
+      "
     volumes:
       - ./services/sugdpark_site:/app
-    expose: ["8003"]
-    depends_on: [db]
+    expose:
+      - "8003"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  tailwind:
+    build:
+      context: .
+      dockerfile: docker/tailwind/Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
+    working_dir: /app
+    command: >
+      sh -c "
+      npm install &&
+      while true; do
+        npx tailwindcss -i ./services/tojirplast_site/static/css/tailwind.css -o ./services/tojirplast_site/static/css/styles.css;
+        sleep 2;
+      done
+      "
 
 volumes:
   pgdata:

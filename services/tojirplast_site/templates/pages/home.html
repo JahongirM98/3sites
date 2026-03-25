@@ -1,6 +1,120 @@
 {% extends "base.html" %}
-{% block title %}Главная — TojirPlast{% endblock %}
+{% block title %}Главная — Tojir Plast{% endblock %}
+
 {% block content %}
-<h1>Главная</h1>
-<p>Заглушка главной страницы.</p>
+<!-- HERO -->
+<section class="bg-white">
+  <div class="max-w-7xl mx-auto px-6 py-20 text-center">
+
+    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
+      Премиальные решения для производства пластика
+    </h1>
+
+    <p class="mt-6 text-lg text-gray-600 max-w-2xl mx-auto">
+      Tojir Plast поставляет высококачественные пластиковые изделия с точностью, надежностью и инновациями.
+    </p>
+
+    <div class="mt-10 flex justify-center gap-4">
+      <a href="/catalog"
+         class="bg-[#012a60] text-white px-6 py-3 rounded-xl text-lg font-medium hover:opacity-90 transition">
+        Заказать сейчас
+      </a>
+
+      <a href="/about"
+         class="border border-gray-300 px-6 py-3 rounded-xl text-lg hover:bg-gray-100 transition">
+        Подробнее
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="bg-[#0b5ed7] text-white py-10">
+    <div class="max-w-6xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+
+        <div>
+            <p class="text-3xl font-bold">15+</p>
+            <p class="text-sm opacity-80">Лет на рынке</p>
+        </div>
+
+        <div>
+            <p class="text-3xl font-bold">500+</p>
+            <p class="text-sm opacity-80">Клиентов</p>
+        </div>
+
+        <div>
+            <p class="text-3xl font-bold">10,000+</p>
+            <p class="text-sm opacity-80">Поставок</p>
+        </div>
+
+        <div>
+            <p class="text-3xl font-bold">98%</p>
+            <p class="text-sm opacity-80">Удовлетворённость</p>
+        </div>
+
+    </div>
+</section>
+
+<!-- ADVANTAGES -->
+<section class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-4">
+
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold mb-3">Почему выбирают Tojir Plast</h2>
+            <p class="text-gray-500 max-w-xl mx-auto">
+                Мы сочетаем передовые технологии с многолетним опытом
+                для производства исключительных пластиковых изделий
+            </p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <h5 class="font-semibold mb-2">Современное производство</h5>
+                <p class="text-gray-500 text-sm">
+                    Передовые технологии и оборудование
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <h5 class="font-semibold mb-2">Гарантия качества</h5>
+                <p class="text-gray-500 text-sm">
+                    ISO стандарты и контроль качества
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <h5 class="font-semibold mb-2">Быстрая доставка</h5>
+                <p class="text-gray-500 text-sm">
+                    Логистика по всему региону
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <h5 class="font-semibold mb-2">15+ лет опыта</h5>
+                <p class="text-gray-500 text-sm">
+                    Надежный партнер
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <h5 class="font-semibold mb-2">Индивидуальные решения</h5>
+                <p class="text-gray-500 text-sm">
+                    Под задачи клиента
+                </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border">
+                <h5 class="font-semibold mb-2">Лучшие цены</h5>
+                <p class="text-gray-500 text-sm">
+                    Цена = качество
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
 {% endblock %}
