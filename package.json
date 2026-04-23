@@ -1,0 +1,28 @@
+{
+  "name": "3sites",
+  "version": "1.0.0",
+  "devDependencies": {
+    "tailwindcss": "3.4.13",
+    "postcss": "^8.4.38",
+    "autoprefixer": "^10.4.19"
+  },
+  "description": "- muosirplast_site — каталог одноразовой посуды\r - tojirplast_site — каталог бочек 100–5000 л\r - sugdpark_site — каталог детских площадок и тренажёров",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JahongirM98/3sites.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JahongirM98/3sites/issues"
+  },
+  "homepage": "https://github.com/JahongirM98/3sites#readme",
+  "scripts": {
+    "dev": "tailwindcss -i ./services/tojirplast_site/static/css/tailwind.css -o ./services/tojirplast_site/static/css/styles.css --watch --poll"
+  }
+}

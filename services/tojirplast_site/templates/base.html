@@ -1,29 +1,212 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8">
-  <title>{% block title %}TojirPlast{% endblock %}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  {% load static %}
-  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <meta charset="utf-8">
+    <title>{% block title %}Tojir Plast{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet">
 </head>
-<body>
-<header>
-  <nav>
-    <a href="/">Главная</a> |
-    <a href="/about/">О компании</a> |
-    <a href="/catalog/">Каталог</a> |
-    <a href="/contacts/">Контакты</a> |
-    <a href="/delivery/">Доставка</a>
-  </nav>
+
+<body class="bg-white text-gray-900">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 w-full border-b border-gray-200 bg-white/80 backdrop-blur-md">
+
+    <nav class="max-w-[1200px] mx-auto h-[96px] flex items-center justify-between px-4">
+
+        <!-- LOGO -->
+        <a href="/" class="flex items-center gap-3 text-[28px] font-bold leading-none">
+
+            <!-- ЛОГО -->
+            <img src="{% static 'images/logo_without.png' %}"
+                 class="h-12 w-auto object-contain">
+
+            <span class="text-[#006aaf]">Tojir Plast</span>
+        </a>
+
+        <!-- NAV -->
+        <ul class="flex items-center gap-10">
+
+            <li>
+                <a href="/"
+                   class="text-[18px] font-semibold text-gray-500 hover:text-[#006aaf] transition-colors duration-200">
+                    Главная
+                </a>
+            </li>
+
+            <li>
+                <a href="/catalog/"
+                   class="text-[18px] font-semibold text-gray-500 hover:text-[#006aaf] transition-colors duration-200">
+                    Каталог
+                </a>
+            </li>
+
+            <li>
+                <a href="/about/"
+                   class="text-[18px] font-semibold text-gray-500 hover:text-[#006aaf] transition-colors duration-200">
+                    О нас
+                </a>
+            </li>
+
+            <li>
+                <a href="/contacts/"
+                   class="text-[18px] font-semibold text-gray-500 hover:text-[#006aaf] transition-colors duration-200">
+                    Контакты
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
 </header>
 
+
+<!-- CONTENT -->
 <main>
-  {% block content %}{% endblock %}
+    {% block content %}{% endblock %}
 </main>
 
-<footer>
-  <small>&copy; {{ now|date:"Y" }} TojirPlast</small>
+<!-- FOOTER -->
+<footer class="border-t border-gray-200 bg-white">
+
+    <div class="max-w-[1200px] mx-auto px-4 py-16">
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+
+            <!-- ЛОГО + ОПИСАНИЕ -->
+            <div class="space-y-4">
+
+                <div class="flex items-center gap-3">
+                    <img src="{% static 'images/logo_without.png' %}"
+                         class="h-10 w-auto object-contain">
+
+                    <span class="text-[20px] font-semibold text-[#006aaf]">
+                        Tojir Plast
+                    </span>
+                </div>
+
+                <p class="text-gray-500 text-sm leading-relaxed max-w-xs">
+                    Производство пластмассовых изделий высокого качества.
+                    Надежные решения для бизнеса и повседневного использования.
+                </p>
+
+            </div>
+
+            <!-- НАВИГАЦИЯ -->
+            <div class="space-y-4">
+
+                <h4 class="text-sm font-semibold text-gray-900">
+                    Навигация
+                </h4>
+
+                <ul class="space-y-2 text-sm text-gray-500">
+
+                    <li>
+                        <a href="/" class="hover:text-[#006aaf] transition">
+                            Главная
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/catalog/" class="hover:text-[#006aaf] transition">
+                            Каталог
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/about/" class="hover:text-[#006aaf] transition">
+                            О компании
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/contacts/" class="hover:text-[#006aaf] transition">
+                            Контакты
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+            <!-- КОНТАКТЫ -->
+            <div class="space-y-4">
+
+                <h4 class="text-sm font-semibold text-gray-900">
+                    Контакты
+                </h4>
+
+                <ul class="space-y-2 text-sm text-gray-500">
+
+                    <li>Согдийская область</li>
+                    <li>+992 92 605 80 80</li>
+                    <li>+992 93 775 44 44</li>
+                    <li>info@tojirplast.tj</li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+        <!-- НИЖНЯЯ ЛИНИЯ -->
+        <div class="mt-12 pt-6 border-t border-gray-200 flex flex-col md:flex-row items-center justify-between gap-4">
+
+            <p class="text-sm text-gray-400">
+                © 2026 Tojir Plast. Все права защищены.
+            </p>
+
+            <div class="flex gap-4 text-sm text-gray-500">
+
+                <a href="#" class="hover:text-[#006aaf] transition">
+                    Политика конфиденциальности
+                </a>
+
+                <a href="#" class="hover:text-[#006aaf] transition">
+                    Условия
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </footer>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // ===== Fade animation =====
+        const elements = document.querySelectorAll(".fade-up");
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("show");
+                }
+            });
+        }, {threshold: 0.2});
+
+        elements.forEach(el => observer.observe(el));
+
+        // ===== FAQ =====
+        document.querySelectorAll(".faq-item").forEach(item => {
+            item.addEventListener("click", () => {
+                const content = item.querySelector(".faq-content");
+
+                if (content.style.display === "block") {
+                    content.style.display = "none";
+                } else {
+                    content.style.display = "block";
+                }
+            });
+        });
+
+    });
+</script>
 </body>
 </html>
