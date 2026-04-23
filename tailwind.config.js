@@ -1,9 +1,14 @@
 module.exports = {
-  content: [
-    "./services/**/*.html",
-  ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+    content: [
+        "./templates/**/*.html",
+        "./services/**/*.html",
+    ],
+    theme: {
+        extend: {
+            fontFamily: {
+                sans: ['Inter', 'sans-serif'],
+            }
+        }
+    },
+    plugins: [],
 }
